@@ -1,0 +1,46 @@
+<div class="card mx-auto" style="max-width: 600px; margin-top: 5%;">
+  <div class="card-body">
+    <h3 class="card-title text-center mb-4">Crear Ticket</h3>
+
+    <form (ngSubmit)="guardar()" #f="ngForm">
+      <div class="mb-3">
+        <label>Título *</label>
+        <input type="text" class="form-control" [(ngModel)]="ticket.titulo" name="titulo" required>
+      </div>
+
+      <div class="mb-3">
+        <label>Descripción *</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="ticket.descripcion" name="descripcion" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label>Categoría *</label>
+        <select class="form-select" [(ngModel)]="ticket.categoria" name="categoria" required>
+          <option value="">Seleccione</option>
+          <option value="Hardware">Hardware</option>
+          <option value="Software">Software</option>
+          <option value="Red">Red</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Prioridad *</label>
+        <select class="form-select" [(ngModel)]="ticket.prioridad" name="prioridad" required>
+          <option value="">Seleccione</option>
+          <option value="Alta">Alta</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Adjuntar archivo</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)">
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Crear Ticket</button>
+      </div>
+    </form>
+  </div>
+</div>

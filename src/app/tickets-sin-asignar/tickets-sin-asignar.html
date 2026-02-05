@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>TICKETS SIN ASIGNAR</h2>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered align-middle">
+
+    <thead class="table-dark">
+      <tr>
+        <th>N°</th>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let t of ticketsDisponibles">
+
+        <td>{{ t.id }}</td>
+        <td>{{ t.titulo }}</td>
+        <td>{{ t.categoria }}</td>
+
+        <td>
+          <span class="badge"
+            [ngClass]="{
+              'bg-danger': t.prioridad === 'Alta',
+              'bg-warning text-dark': t.prioridad === 'Media',
+              'bg-success': t.prioridad === 'Baja'
+            }">
+            {{ t.prioridad }}
+          </span>
+        </td>
+
+        <td>
+          <span class="badge bg-secondary">
+            {{ t.estado }}
+          </span>
+        </td>
+
+        <td>
+          <button class="btn btn-sm btn-success"
+                  (click)="asignarTicket(t)">
+            Asignar
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>

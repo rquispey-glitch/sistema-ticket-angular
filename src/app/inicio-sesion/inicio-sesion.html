@@ -1,0 +1,36 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow" style="width: 400px;">
+
+    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+    <form (ngSubmit)="entrar()">
+
+      <!-- Correo -->
+      <div class="mb-3">
+        <label class="form-label">Correo electrónico</label>
+        <input type="email"
+               class="form-control"
+               [(ngModel)]="correo"
+               name="correo"
+               required>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input type="password"
+               class="form-control"
+               [(ngModel)]="contrasena"
+               name="contrasena"
+               required>
+      </div>
+
+      <!-- Botón -->
+      <button class="btn btn-primary w-100" type="submit">
+        Ingresar
+      </button>
+
+    </form>
+
+  </div>
+</div>

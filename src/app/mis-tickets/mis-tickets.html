@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>MIS TICKETS</h2>
+  <a class="btn btn-success" routerLink="/crear-ticket">
+    <i class="bi bi-plus-circle"></i> Crear Ticket
+  </a>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-3">
+    <label>Filtrar por Estado</label>
+    <select class="form-select" [(ngModel)]="filtroEstado" (change)="aplicarFiltro()">
+      <option value="">Todos</option>
+      <option value="Abierto">Abiertos</option>
+      <option value="En Proceso">En Proceso</option>
+      <option value="Sin Asignar">Sin Asignar</option>
+      <option value="Resuelto">Resueltos</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label>Filtrar por Prioridad</label>
+    <select class="form-select" [(ngModel)]="filtroPrioridad" (change)="aplicarFiltro()">
+      <option value="">Todas</option>
+      <option value="Alta">Alta</option>
+      <option value="Media">Media</option>
+      <option value="Baja">Baja</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label>Filtrar por Categoría</label>
+    <select class="form-select" [(ngModel)]="filtroCategoria" (change)="aplicarFiltro()">
+      <option value="">Todas</option>
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Red">Red</option>
+    </select>
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button class="btn btn-outline-secondary w-100" (click)="limpiarFiltros()">
+      Limpiar
+    </button>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>N°</th>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of ticketsFiltrados" [class.table-warning]="t.estado === 'Sin Asignar'" [class.table-danger]="t.prioridad === 'Alta' && t.estado !== 'Resuelto'">
+        <td>{{ t.id }}</td>
+        <td>{{ t.titulo }}</td>
+        <td><span class="badge bg-secondary">{{ t.categoria }}</span></td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'bg-danger': t.prioridad === 'Alta',
+            'bg-warning text-dark': t.prioridad === 'Media',
+            'bg-success': t.prioridad === 'Baja'
+          }">{{ t.prioridad }}</span>
+        </td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'bg-secondary': t.estado === 'Sin Asignar',
+            'bg-primary': t.estado === 'Abierto',
+            'bg-info text-dark': t.estado === 'En Proceso',
+            'bg-success': t.estado === 'Resuelto'
+          }">{{ t.estado }}</span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-1" (click)="verTicket(t.id)">
+            Ver
+          </button>
+          <button class="btn btn-sm btn-outline-warning" (click)="editarTicket(t.id)">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="ticketsFiltrados.length === 0" class="alert alert-info text-center">
+  No se encontraron tickets con los filtros aplicados.
+</div>

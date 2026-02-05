@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>TICKETS ASIGNADOS</h2>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>N°</th>
+        <th>Título</th>
+        <th>Técnico Asignado</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of ticketsAsignados">
+        <td>{{ t.id }}</td>
+        <td>{{ t.titulo }}</td>
+        <td>{{ tecnicoNombre(t.idTecnico) }}</td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'bg-danger': t.prioridad === 'Alta',
+            'bg-warning text-dark': t.prioridad === 'Media',
+            'bg-success': t.prioridad === 'Baja'
+          }">{{ t.prioridad }}</span>
+        </td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'bg-secondary': t.estado === 'Sin Asignar',
+            'bg-primary': t.estado === 'Abierto',
+            'bg-info text-dark': t.estado === 'En Proceso',
+            'bg-success': t.estado === 'Resuelto'
+          }">{{ t.estado }}</span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary" (click)="verTicket(t.id)">Ver</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
